@@ -3,6 +3,7 @@ import { Playfair_Display, Roboto, Work_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Row } from "@/components/misc/Row";
+import HomeGradients from "@/components/misc/HomeGradients";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -35,8 +36,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} min-h-full bg-black font-sans text-white`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative min-h-full bg-black font-sans text-white`}
       >
+        <div className="absolute left-0 top-0">
+          <HomeGradients />
+        </div>
+        <HomeGradients />
         <Row>
           <Navbar />
           {children}

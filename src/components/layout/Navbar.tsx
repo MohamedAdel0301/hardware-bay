@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <header className="font-worksans my-8 flex min-w-full items-center justify-between">
+    <header className="font-worksans mb-8 flex min-w-full items-center justify-between pt-8">
       <Logo className="max-w-44" />
 
       <nav className="flex gap-8 text-2xl">
