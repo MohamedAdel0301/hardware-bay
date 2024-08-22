@@ -21,8 +21,7 @@ const CategoriesBtn = () => {
           )}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 text-base">
-        
+      <DropdownMenuContent className="w-56 text-base">  
       </DropdownMenuContent>
     </DropdownMenu>
   );
