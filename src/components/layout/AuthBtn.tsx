@@ -10,7 +10,7 @@ type IProps = {
 const AuthBtn = ({ className, href, children }: IProps) => {
   return (
     <Link
-      href={`/${href}`}
+      href={`${href}`}
       className={cn("flex items-center justify-center", className)}
     >
       {children}

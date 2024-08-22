@@ -38,9 +38,6 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative min-h-full bg-black font-sans text-white`}
       >
-        <div className="absolute left-0 top-0">
-          <HomeGradients />
-        </div>
         <HomeGradients />
         <Row>
           <Navbar />
