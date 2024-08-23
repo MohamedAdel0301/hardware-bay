@@ -1,13 +1,14 @@
 import AuthTemplate from "@/components/auth/AuthTemplate";
+import FormLogin from "@/components/auth/FormLogin";
 
-const page = () => {
+const LoginPage = () => {
   return (
     <main className="mt-24 flex min-h-[100%] justify-center">
       <AuthTemplate type="login">
-        <p>.</p>
+        <FormLogin />
       </AuthTemplate>
     </main>
   );
 };
 
-export default page;
+export default LoginPage;
