@@ -36,13 +36,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-400"
+      className="scrollbar-thin scrollbar-track-black scrollbar-thumb-gray-600"
     >
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative min-h-full overflow-y-scroll bg-black font-sans text-white antialiased`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-black font-sans text-white antialiased`}
       >
         <HomeGradients />
-        <Row>
+        <Row className="h-screen min-h-screen">
           <Navbar />
           {children}
         </Row>
