@@ -13,7 +13,7 @@ const playfair = Playfair_Display({
 const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
-  weight: ["100", "300", "400", "500", "700", "900"],
+  weight: ["300", "400", "500", "700"],
   variable: "--font-roboto",
 });
 
@@ -34,9 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className="scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-400"
+    >
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative min-h-full bg-black font-sans text-white`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative min-h-full overflow-y-scroll bg-black font-sans text-white antialiased`}
       >
         <HomeGradients />
         <Row>
