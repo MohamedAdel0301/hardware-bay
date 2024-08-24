@@ -35,3 +35,8 @@ export const ZodLoginSchema = z.object({
 });
 
 export type TLoginSchema = z.infer<typeof ZodLoginSchema>;
+
+export type result = {
+  success: boolean;
+  error?: string;
+};

@@ -1,12 +1,12 @@
 "use server";
 
 import { signIn } from "@/auth";
-import { ZodRegisterSchema } from "@/types/auth-types";
+import { result, ZodRegisterSchema } from "@/types/auth-types";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
 import { Prisma } from "@prisma/client";
-import { redirect } from "next/navigation";
+import { sleep } from "@/lib/utils";
 
 const SALT_ROUNDS = 10;
 
@@ -32,10 +32,11 @@ export async function logIn(data: unknown) {
   }
 }
 
-export async function signUp(data: unknown) {
+export async function signUp(data: unknown): Promise<result> {
+  await sleep(3000);
   const validation = ZodRegisterSchema.safeParse(data);
   if (!validation.success) {
-    return { message: "Invalid request" };
+    return { success: false, error: "Invalid user data" };
   }
   const { username, email, password } = validation.data;
 
@@ -53,14 +54,10 @@ export async function signUp(data: unknown) {
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
       if (err.code === "P2002") {
-        return {
-          message: "Email already exists.",
-        };
+        return { success: false, error: "Credentials already exist" };
       }
     }
-    return {
-      message: "Could not create user.",
-    };
+    return { success: false, error: "Unknown server error" };
   }
-  redirect("/auth/login");
+  return { success: true };
 }

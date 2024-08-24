@@ -4,18 +4,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TRegisterSchema, ZodRegisterSchema } from "@/types/auth-types";
 import SubmitBtn from "./SubmitBtn";
 import { signUp } from "@/actions/auth-actions";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const FormRegister = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<TRegisterSchema>({
     resolver: zodResolver(ZodRegisterSchema),
   });
 
   const subtmitForm = async (data: TRegisterSchema) => {
-    await signUp(data);
+    const result = await signUp(data);
+    if (result.success) {
+      toast.success("Registered successfully");
+      router.push("/auth/login");
+      router.refresh();
+    } else if (result.error) {
+      toast.error(result.error);
+    }
   };
 
   return (
@@ -94,7 +104,7 @@ const FormRegister = () => {
           </p>
         )}
       </div>
-      <SubmitBtn />
+      <SubmitBtn disabled={isSubmitting} />
     </form>
   );
 };

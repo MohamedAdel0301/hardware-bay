@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Row } from "@/components/misc/Row";
 import HomeGradients from "@/components/misc/HomeGradients";
+import { Toaster } from "react-hot-toast";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -45,6 +46,11 @@ export default function RootLayout({
         <Row className="h-screen min-h-screen">
           <Navbar />
           {children}
+          <Toaster
+            toastOptions={{
+              className: "text-2xl",
+            }}
+          />
         </Row>
       </body>
     </html>
