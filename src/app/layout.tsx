@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Row } from "@/components/misc/Row";
 import HomeGradients from "@/components/misc/HomeGradients";
+import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -13,7 +15,7 @@ const playfair = Playfair_Display({
 const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
-  weight: ["100", "300", "400", "500", "700", "900"],
+  weight: ["300", "400", "500", "700"],
   variable: "--font-roboto",
 });
 
@@ -34,17 +36,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className="scrollbar-thin scrollbar-track-black scrollbar-thumb-gray-600"
+    >
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative min-h-full bg-black font-sans text-white`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-gradient-to-r from-black via-gray-900 to-black font-sans text-white antialiased`}
       >
-        <div className="absolute left-0 top-0">
-          <HomeGradients />
-        </div>
         <HomeGradients />
-        <Row>
-          <Navbar />
-          {children}
+        <Row className="h-screen min-h-screen">
+          <SessionProvider>
+            <Navbar />
+            {children}
+          </SessionProvider>
+          <Toaster
+            toastOptions={{
+              className: "text-2xl",
+            }}
+          />
         </Row>
       </body>
     </html>

@@ -10,7 +10,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 const CategoriesBtn = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
       <DropdownMenuTrigger className="border-none outline-none">
         <div className="flex">
           Categories
@@ -21,8 +21,7 @@ const CategoriesBtn = () => {
           )}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 text-base">  
-      </DropdownMenuContent>
+      <DropdownMenuContent className="w-56 text-base"></DropdownMenuContent>
     </DropdownMenu>
   );
 };

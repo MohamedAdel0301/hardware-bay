@@ -73,3 +73,9 @@
     @apply relative text-white after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-white after:transition after:delay-200 hover:after:scale-x-100;
   }
 }
+
+@layer utilities {
+  .input-element {
+    @apply rounded-lg border border-gray-300 p-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black;
+  }
+}
