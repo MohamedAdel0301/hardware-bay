@@ -1,31 +1,8 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
-
-const passwordValidator = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?!.* ).{8,16}$/);
-
-const ZodRegisterSchema = z
-  .object({
-    username: z
-      .string()
-      .min(3, { message: "Username must be greater than 2 characters" }),
-    email: z.string().email().min(5),
-    password: z
-      .string()
-      .min(8, { message: "Password must be between 8 and 16 characters" })
-      .max(16, { message: "Password must be between 8 and 16 characters" })
-      .regex(passwordValidator, {
-        message: "Password must contain uppercase & lowercase letters",
-      }),
-    confirm: z.string().min(8).max(16),
-  })
-  .refine((data) => data.password === data.confirm, {
-    message: "Passwords don't match",
-    path: ["confirm"],
-  });
-
-type TRegisterSchema = z.infer<typeof ZodRegisterSchema>;
+import { TRegisterSchema, ZodRegisterSchema } from "@/types/auth-types";
+import SubmitBtn from "./SubmitBtn";
 
 const FormRegister = () => {
   const {
@@ -116,12 +93,7 @@ const FormRegister = () => {
           </p>
         )}
       </div>
-      <button
-        className="max-w-fit transform self-center rounded-lg bg-black px-4 py-2 text-xl text-white shadow-sm transition-transform focus:outline-none active:scale-95"
-        type="submit"
-      >
-        Submit
-      </button>
+      <SubmitBtn />
     </form>
   );
 };
