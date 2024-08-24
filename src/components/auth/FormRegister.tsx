@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TRegisterSchema, ZodRegisterSchema } from "@/types/auth-types";
 import SubmitBtn from "./SubmitBtn";
+import { signUp } from "@/actions/auth-actions";
 
 const FormRegister = () => {
   const {
@@ -13,8 +14,8 @@ const FormRegister = () => {
     resolver: zodResolver(ZodRegisterSchema),
   });
 
-  const subtmitForm = (data: TRegisterSchema) => {
-    console.log(data);
+  const subtmitForm = async (data: TRegisterSchema) => {
+    await signUp(data);
   };
 
   return (

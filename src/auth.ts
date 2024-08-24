@@ -8,7 +8,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials) {
-        //work on signin attempt, if successful return the user
+        console.log(credentials);
         return null;
       },
     }),
