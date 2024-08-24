@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import { Row } from "@/components/misc/Row";
 import HomeGradients from "@/components/misc/HomeGradients";
 import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -44,8 +45,10 @@ export default function RootLayout({
       >
         <HomeGradients />
         <Row className="h-screen min-h-screen">
-          <Navbar />
-          {children}
+          <SessionProvider>
+            <Navbar />
+            {children}
+          </SessionProvider>
           <Toaster
             toastOptions={{
               className: "text-2xl",

@@ -1,17 +1,18 @@
 "use server";
 
 import { signIn } from "@/auth";
-import { result, ZodRegisterSchema } from "@/types/auth-types";
+import { result, ZodLoginSchema, ZodRegisterSchema } from "@/types/auth-types";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
 import { Prisma } from "@prisma/client";
 import { sleep } from "@/lib/utils";
 
+
 const SALT_ROUNDS = 10;
 
 export async function logIn(data: unknown) {
-  const validation = ZodRegisterSchema.safeParse(data);
+  const validation = ZodLoginSchema.safeParse(data);
   if (!validation.success) {
     return { message: "Invalid request" };
   }

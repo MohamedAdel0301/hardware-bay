@@ -1,5 +1,8 @@
 import NextAuth, { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
+import { ZodLoginSchema } from "./types/auth-types";
+import prisma from "../prisma/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -7,9 +10,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     Credentials({
-      async authorize(credentials) {
-        console.log(credentials);
-        return null;
+      async authorize(credentials: unknown) {
+        const validation = ZodLoginSchema.safeParse(credentials);
+
+        if (!validation.success) {
+          return null;
+        }
+        const { email, password } = validation.data;
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email,
+          },
+        });
+        if (!user) return null;
+        const correctPassword = await bcrypt.compare(password, user.password);
+        if (!correctPassword) return null;
+        return user;
       },
     }),
   ],
