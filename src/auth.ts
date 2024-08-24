@@ -4,15 +4,15 @@ import bcrypt from "bcryptjs";
 import { ZodLoginSchema } from "./types/auth-types";
 import prisma from "../prisma/client";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const { handlers, signIn, auth, signOut } = NextAuth({
   pages: {
-    signIn: "/auth/login",
+    signIn: "/auth/signin",
   },
   providers: [
     Credentials({
       async authorize(credentials: unknown) {
         const validation = ZodLoginSchema.safeParse(credentials);
-
+        console.log(credentials);
         if (!validation.success) {
           return null;
         }
@@ -40,6 +40,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     authorized: ({ auth, request }) => {
       //return false on disallowed requests
       return true;
+    },
+    redirect: async ({ url, baseUrl }) => {
+      console.log(baseUrl);
+      return baseUrl;
     },
   },
 } satisfies NextAuthConfig);

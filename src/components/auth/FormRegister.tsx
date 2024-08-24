@@ -21,7 +21,7 @@ const FormRegister = () => {
     const result = await signUp(data);
     if (result.success) {
       toast.success("Registered successfully");
-      router.push("/auth/login");
+      router.push("/auth/signin");
       router.refresh();
     } else if (result.error) {
       toast.error(result.error);

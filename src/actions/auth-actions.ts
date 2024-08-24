@@ -1,13 +1,12 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { result, ZodLoginSchema, ZodRegisterSchema } from "@/types/auth-types";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
 import { Prisma } from "@prisma/client";
 import { sleep } from "@/lib/utils";
-
 
 const SALT_ROUNDS = 10;
 
@@ -61,4 +60,8 @@ export async function signUp(data: unknown): Promise<result> {
     return { success: false, error: "Unknown server error" };
   }
   return { success: true };
+}
+
+export async function logout() {
+  await signOut({ redirectTo: "/auth/signin" });
 }
