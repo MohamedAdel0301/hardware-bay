@@ -12,7 +12,6 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
     Credentials({
       async authorize(credentials: unknown) {
         const validation = ZodLoginSchema.safeParse(credentials);
-        console.log(credentials);
         if (!validation.success) {
           return null;
         }
@@ -42,7 +41,6 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
       return true;
     },
     redirect: async ({ url, baseUrl }) => {
-      console.log(baseUrl);
       return baseUrl;
     },
   },
