@@ -11,12 +11,42 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  username      String   @unique
-  email         String   @unique
+  id            String    @id @default(cuid())
+  username      String    @unique
+  email         String    @unique
   password      String
-  emailVerified Boolean  @default(false)
+  emailVerified Boolean   @default(false)
   image         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  products      Product[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Product {
+  id                   String                 @id @default(cuid())
+  name                 String
+  description          String
+  price                Float
+  sold                 Boolean                @default(false)
+  seller               User                   @relation(fields: [sellerId], references: [id])
+  sellerId             String
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  CategoriesOnProducts CategoriesOnProducts[]
+}
+
+model Category {
+  id                   String                 @id @default(cuid())
+  name                 String                 @unique
+  slug                 String                 @unique
+  CategoriesOnProducts CategoriesOnProducts[]
+}
+
+model CategoriesOnProducts {
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  @@id([productId, categoryId])
 }
