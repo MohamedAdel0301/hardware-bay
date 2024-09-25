@@ -1,8 +1,6 @@
-export type Category = {
-  name: string;
-  slug: string;
-  image: string;
-};
+import { Category as prismaCategory } from "@prisma/client";
+
+export type Category = Omit<prismaCategory, "id">;
 
 export const categories: Category[] = [
   {

@@ -5,6 +5,7 @@ import Link from "next/link";
 type TCategoryItem = {
   category: Category;
 };
+
 const CategoryItem = ({ category }: TCategoryItem) => {
   return (
     <Link href={`/category?cat=${category.slug}`}>
