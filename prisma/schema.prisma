@@ -26,6 +26,7 @@ model Product {
   id                   String                 @id @default(cuid())
   name                 String
   description          String
+  image                String[]
   price                Float
   sold                 Boolean                @default(false)
   seller               User                   @relation(fields: [sellerId], references: [id])
@@ -39,6 +40,7 @@ model Category {
   id                   String                 @id @default(cuid())
   name                 String                 @unique
   slug                 String                 @unique
+  image                String
   CategoriesOnProducts CategoriesOnProducts[]
 }
 
