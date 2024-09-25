@@ -10,25 +10,34 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
   },
   providers: [
     Credentials({
-      async authorize(credentials: unknown) {
+      async authorize(credentials: Record<string, unknown>) {
         const validation = ZodLoginSchema.safeParse(credentials);
         if (!validation.success) {
           return null;
         }
         const { email, password } = validation.data;
+        console.log(validation.data);
 
         const user = await prisma.user.findUnique({
           where: {
             email,
           },
         });
-        if (!user) return null;
+        if (!user) {
+          return null;
+        }
+
         const correctPassword = await bcrypt.compare(password, user.password);
-        if (!correctPassword) return null;
+
+        if (!correctPassword) {
+          return null;
+        }
+
         return user;
       },
     }),
   ],
+
   secret: process.env.SECRET,
 
   session: {
@@ -44,6 +53,12 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
     },
     redirect: async ({ url, baseUrl }) => {
       return baseUrl;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.name = user.name;
+      }
+      return token;
     },
   },
 } satisfies NextAuthConfig);
