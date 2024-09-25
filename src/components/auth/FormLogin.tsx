@@ -4,8 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodLoginSchema, TLoginSchema } from "@/types/auth-types";
 import SubmitBtn from "./SubmitBtn";
 import { logIn } from "@/actions/auth-actions";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const FormLogin = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -16,7 +20,14 @@ const FormLogin = () => {
 
   const subtmitForm = async (data: TLoginSchema) => {
     try {
-      await logIn(data);
+      const result = await logIn(data);
+      if (result.success) {
+        toast.success("Successfully logged in");
+        router.push("/");
+        router.refresh();
+      } else if (!result.success && result.error) {
+        toast.error(result.error);
+      }
     } catch (err) {}
   };
 

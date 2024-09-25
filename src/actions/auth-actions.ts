@@ -1,30 +1,28 @@
 "use server";
 
 import { signIn, signOut } from "@/auth";
-import { result, ZodLoginSchema, ZodRegisterSchema } from "@/types/auth-types";
+import { result, ZodRegisterSchema } from "@/types/auth-types";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
 import { Prisma } from "@prisma/client";
-import { sleep } from "@/lib/utils";
 
 const SALT_ROUNDS = 10;
 
-export async function logIn(data: unknown) {
-  const validation = ZodLoginSchema.safeParse(data);
-  if (!validation.success) {
-    return { message: "Invalid request" };
-  }
+export async function logIn(data: { email: string; password: string }) {
   try {
-    await signIn("credentials", validation.data);
+    await signIn("credentials", { ...data, redirectTo: "/" });
+    return { success: true};
   } catch (err) {
     if (err instanceof AuthError) {
       switch (err.type) {
         case "CredentialsSignin": {
-          return { message: "Invalid credentials" };
+          return { success: false, error: "Invalid credentials" };
         }
+        case "CredentialsSignin":
+          throw err;
         default: {
-          return { message: "Couldn't sign in" };
+          return { success: false, error: "Failed to sign in" };
         }
       }
     }
@@ -33,7 +31,6 @@ export async function logIn(data: unknown) {
 }
 
 export async function signUp(data: unknown): Promise<result> {
-  await sleep(3000);
   const validation = ZodRegisterSchema.safeParse(data);
   if (!validation.success) {
     return { success: false, error: "Invalid user data" };

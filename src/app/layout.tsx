@@ -6,6 +6,7 @@ import { Row } from "@/components/misc/Row";
 import HomeGradients from "@/components/misc/HomeGradients";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import Footer from "@/components/layout/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -41,10 +42,10 @@ export default function RootLayout({
       className="scrollbar-thin scrollbar-track-black scrollbar-thumb-gray-600"
     >
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-gradient-to-r from-black via-gray-900 to-black font-sans text-white antialiased`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-black bg-gradient-to-r font-sans text-white antialiased`}
       >
         <HomeGradients />
-        <Row className="h-screen min-h-screen">
+        <Row className="flex min-h-screen flex-col">
           <SessionProvider>
             <Navbar />
             {children}
@@ -54,6 +55,7 @@ export default function RootLayout({
               className: "text-2xl",
             }}
           />
+          <Footer />
         </Row>
       </body>
     </html>

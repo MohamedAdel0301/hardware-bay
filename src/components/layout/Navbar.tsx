@@ -18,7 +18,7 @@ const Navbar = () => {
           Contact Us
         </Link>
       </nav>
-        <AuthSection />
+      <AuthSection />
     </header>
   );
 };

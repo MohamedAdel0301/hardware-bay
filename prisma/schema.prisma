@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,32 +15,38 @@ model User {
   username      String    @unique
   email         String    @unique
   password      String
-  emailVerified DateTime?
+  emailVerified Boolean   @default(false)
   image         String?
-  accounts      Account[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Product       Product[]
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+model Product {
+  id                   String                 @id @default(cuid())
+  name                 String
+  description          String
+  price                Float
+  sold                 Boolean                @default(false)
+  seller               User                   @relation(fields: [sellerId], references: [id])
+  sellerId             String
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  CategoriesOnProducts CategoriesOnProducts[]
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Category {
+  id                   String                 @id @default(cuid())
+  name                 String                 @unique
+  slug                 String                 @unique
+  CategoriesOnProducts CategoriesOnProducts[]
+}
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model CategoriesOnProducts {
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
 
-  @@unique([provider, providerAccountId])
+  @@id([productId, categoryId])
 }
