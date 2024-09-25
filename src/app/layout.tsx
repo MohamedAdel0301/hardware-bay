@@ -6,6 +6,7 @@ import { Row } from "@/components/misc/Row";
 import HomeGradients from "@/components/misc/HomeGradients";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import Footer from "@/components/layout/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ export default function RootLayout({
               className: "text-2xl",
             }}
           />
+          <Footer />
         </Row>
       </body>
     </html>
