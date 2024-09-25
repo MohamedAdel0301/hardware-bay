@@ -42,7 +42,7 @@ export default function RootLayout({
       className="scrollbar-thin scrollbar-track-black scrollbar-thumb-gray-600"
     >
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-gradient-to-r from-black via-gray-950 to-black font-sans text-white antialiased`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-black bg-gradient-to-r font-sans text-white antialiased`}
       >
         <HomeGradients />
         <Row className="flex min-h-screen flex-col">
