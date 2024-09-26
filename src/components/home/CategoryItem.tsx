@@ -8,7 +8,7 @@ type TCategoryItem = {
 
 const CategoryItem = ({ category }: TCategoryItem) => {
   return (
-    <Link href={`/category?cat=${category.slug}`}>
+    <Link href={`/search?cat=${category.slug}`}>
       <div className="group flex flex-col items-center gap-y-2">
         <div className="h-[160px] w-[160px] rounded-full bg-white">
           <Image

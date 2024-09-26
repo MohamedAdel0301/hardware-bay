@@ -63,4 +63,64 @@ export const categories: Category[] = [
     slug: "controller",
     image: "/catalogues/controller.png",
   },
+  {
+    name: "Speakers",
+    slug: "speakers",
+    image: "/catalogues/speakers.png",
+  },
+  {
+    name: "Webcam",
+    slug: "webcam",
+    image: "/catalogues/webcam.png",
+  },
+  {
+    name: "Thermal Paste",
+    slug: "thermal-paste",
+    image: "/catalogues/thermal-paste.png",
+  },
+  {
+    name: "Cooling Fan",
+    slug: "cooling-fan",
+    image: "/catalogues/cooling-fan.png",
+  },
+  {
+    name: "Graphics Card",
+    slug: "gpu",
+    image: "/catalogues/gpu.png",
+  },
+  {
+    name: "Power Strip",
+    slug: "power-strip",
+    image: "/catalogues/power-strip.png",
+  },
+  {
+    name: "external-SSD",
+    slug: "external-ssd",
+    image: "/catalogues/external-ssd.png",
+  },
+  {
+    name: "External HDD",
+    slug: "external-hdd",
+    image: "/catalogues/external-hdd.png",
+  },
+  {
+    name: "Docking Station",
+    slug: "docking-station",
+    image: "/catalogues/docking-station.png",
+  },
+  {
+    name: "UPS",
+    slug: "ups",
+    image: "/catalogues/ups.png",
+  },
+  {
+    name: "Network Adapter",
+    slug: "network-adapter",
+    image: "/catalogues/network-adapter.png",
+  },
+  {
+    name: "Printer",
+    slug: "printer",
+    image: "/catalogues/printer.png",
+  }
 ];

@@ -7,6 +7,8 @@ import HomeGradients from "@/components/misc/HomeGradients";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import Footer from "@/components/layout/Footer";
+import { getAllCategories } from "@/actions/data-actions";
+import GlobalDataProvider from "@/contexts/GlobalDataProvider";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -31,11 +33,13 @@ export const metadata: Metadata = {
   description: "Your one-stop store for buying, selling, and trading hardware",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const categories = await getAllCategories();
+
   return (
     <html
       lang="en"
@@ -45,18 +49,20 @@ export default function RootLayout({
         className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-black bg-gradient-to-r font-sans text-white antialiased`}
       >
         <HomeGradients />
-        <Row className="flex min-h-screen flex-col">
-          <SessionProvider>
-            <Navbar />
-            {children}
-          </SessionProvider>
-          <Toaster
-            toastOptions={{
-              className: "text-2xl",
-            }}
-          />
-          <Footer />
-        </Row>
+        <SessionProvider>
+          <GlobalDataProvider categories={categories}>
+            <Row className="flex min-h-screen flex-col">
+              <Navbar />
+              {children}
+              <Toaster
+                toastOptions={{
+                  className: "text-2xl",
+                }}
+              />
+              <Footer />
+            </Row>
+          </GlobalDataProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -1,8 +1,8 @@
-import { getCategories } from "@/actions/data-actions";
+import { getMainCategories } from "@/actions/data-actions";
 import CategoryItem from "./CategoryItem";
 
 const CategoriesSection = async () => {
-  const categories = await getCategories();
+  const categories = await getMainCategories();
   return (
     <section className="my-24 flex w-full flex-col gap-8">
       <h2 className="w-full text-center text-4xl">Categories</h2>
