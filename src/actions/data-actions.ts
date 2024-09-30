@@ -15,3 +15,10 @@ export const getAllCategories = async () => {
   });
   return categories;
 };
+
+export const getAllBrandNames = async () => {
+  const brands = await prisma.brand.findMany({
+    select: { name: true, slug: true },
+  });
+  return brands;
+};
