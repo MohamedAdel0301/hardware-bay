@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
-const page = () => {
+const InvalidProductPage = () => {
   return notFound();
 };
 
-export default page;
+export default InvalidProductPage;
