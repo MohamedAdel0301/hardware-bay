@@ -1,5 +1,6 @@
 "use server";
 import prisma from "../../prisma/client";
+import { TAddProductSchema } from "@/types/ProductTypes";
 
 export const getMainCategories = async () => {
   const mainCategories = await prisma.category.findMany({
@@ -21,4 +22,33 @@ export const getAllBrandNames = async () => {
     select: { name: true, slug: true },
   });
   return brands;
+};
+
+export const AddProduct = async (
+  product: TAddProductSchema,
+  userId: string,
+) => {
+  await prisma.product.create({
+    data: {
+      name: product.name,
+      description: product.description,
+      image: product.image,
+      price: Number(product.price),
+      seller: {
+        connect: {
+          id: userId,
+        },
+      },
+      brand: {
+        connect: {
+          slug: product.brand,
+        },
+      },
+      category: {
+        connect: {
+          slug: product.category,
+        },
+      },
+    },
+  });
 };

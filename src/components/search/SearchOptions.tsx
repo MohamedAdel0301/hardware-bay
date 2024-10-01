@@ -37,7 +37,6 @@ const SearchOptions = ({
   const [brand, setBrand] = useState<string | undefined>(
     searchParams.get("brand") ?? undefined,
   );
-  console.log(priceRange);
 
   const onChangeParameters = () => {
     const params = new URLSearchParams();

@@ -31,6 +31,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { fileListToBase64 } from "@/lib/utils";
+import { AddProduct } from "@/actions/data-actions";
+import { useSession } from "next-auth/react";
+import AddProductFormSkeleton from "./AddProductFormSkeleton";
 
 type TAddProductForm = {
   categories: Category[];
@@ -38,6 +41,8 @@ type TAddProductForm = {
 };
 
 const AddProductForm = ({ categories, brands }: TAddProductForm) => {
+  const { status, data: session } = useSession();
+  const userId = session?.user?.id as string;
   const {
     register,
     handleSubmit,
@@ -53,7 +58,7 @@ const AddProductForm = ({ categories, brands }: TAddProductForm) => {
     try {
       result = await fileListToBase64(data.image);
       const completeData = { ...data, image: result };
-      console.log(completeData);
+      await AddProduct(completeData, userId);
     } catch (error) {
       setError("image", {
         type: "value",
@@ -61,6 +66,10 @@ const AddProductForm = ({ categories, brands }: TAddProductForm) => {
       });
     }
   };
+
+  if (status === "loading") {
+    return <AddProductFormSkeleton />;
+  }
 
   return (
     <Card className="w-full max-w-md border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 shadow-lg">

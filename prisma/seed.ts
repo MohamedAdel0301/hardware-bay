@@ -11,7 +11,6 @@ async function addCategories(category: Category, index: number) {
       image: category.image,
     },
   });
-  console.log(`added category ${index}`);
 }
 
 async function addBrands(brand: Brand, index: number) {
@@ -21,7 +20,6 @@ async function addBrands(brand: Brand, index: number) {
       slug: brand.slug,
     },
   });
-  console.log(`added brand ${index}`);
 }
 
 async function main() {
@@ -35,7 +33,6 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error(e);
     process.exit(1);
   })
   .finally(async () => {
