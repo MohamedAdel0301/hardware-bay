@@ -30,7 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AddProduct } from "@/actions/data-actions";
+import { postProduct } from "@/actions/data-actions";
 import { useSession } from "next-auth/react";
 import AddProductFormSkeleton from "./AddProductFormSkeleton";
 import toast from "react-hot-toast";
@@ -64,7 +64,7 @@ const AddProductForm = ({ categories, brands }: TAddProductForm) => {
     }
     try {
       const completeData = { ...data, image: imageUrl };
-      await AddProduct(completeData, userId);
+      await postProduct(completeData, userId);
       toast.success("Product was added successfully");
     } catch (error) {
       setError("image", {

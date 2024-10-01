@@ -24,7 +24,7 @@ export const getAllBrandNames = async () => {
   return brands;
 };
 
-export const AddProduct = async (
+export const postProduct = async (
   product: TAddProductSchema,
   userId: string,
 ) => {

@@ -6,13 +6,14 @@ import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
 import { Prisma } from "@prisma/client";
+import type { User } from "@prisma/client";
 
 const SALT_ROUNDS = 10;
 
 export async function logIn(data: { email: string; password: string }) {
   try {
     await signIn("credentials", { ...data, redirectTo: "/" });
-    return { success: true};
+    return { success: true };
   } catch (err) {
     if (err instanceof AuthError) {
       switch (err.type) {
@@ -61,4 +62,23 @@ export async function signUp(data: unknown): Promise<result> {
 
 export async function logout() {
   await signOut({ redirectTo: "/auth/signin" });
+}
+
+export async function getOneUser({
+  email,
+  id,
+}: {
+  email?: string;
+  id?: string;
+}): Promise<User | null> {
+  if (!email && !id) {
+    throw new Error("Either email or id must be provided");
+  }
+  if (email && id) {
+    throw new Error("Cannot provide two parameters at the same time");
+  }
+  const user = await prisma.user.findUnique({
+    where: email ? { email } : { id },
+  });
+  return user;
 }
