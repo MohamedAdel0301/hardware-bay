@@ -30,10 +30,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { fileListToBase64 } from "@/lib/utils";
 import { AddProduct } from "@/actions/data-actions";
 import { useSession } from "next-auth/react";
 import AddProductFormSkeleton from "./AddProductFormSkeleton";
+import toast from "react-hot-toast";
+import ImageUploadBtn from "./ImageUploadBtn";
+import { useState } from "react";
+import Link from "next/link";
 
 type TAddProductForm = {
   categories: Category[];
@@ -41,6 +44,7 @@ type TAddProductForm = {
 };
 
 const AddProductForm = ({ categories, brands }: TAddProductForm) => {
+  const [imageUrl, setImageUrl] = useState<string | null>("");
   const { status, data: session } = useSession();
   const userId = session?.user?.id as string;
   const {
@@ -54,16 +58,20 @@ const AddProductForm = ({ categories, brands }: TAddProductForm) => {
   });
 
   const submitForm = async (data: TAddProductSchema) => {
-    let result: string | null;
+    if (!imageUrl) {
+      toast.error("No image chosen");
+      return;
+    }
     try {
-      result = await fileListToBase64(data.image);
-      const completeData = { ...data, image: result };
+      const completeData = { ...data, image: imageUrl };
       await AddProduct(completeData, userId);
+      toast.success("Product was added successfully");
     } catch (error) {
       setError("image", {
         type: "value",
         message: "error parsing image",
       });
+      toast.error("Failed to add product");
     }
   };
 
@@ -146,13 +154,19 @@ const AddProductForm = ({ categories, brands }: TAddProductForm) => {
               <Image className="mr-2 h-4 w-4 text-purple-400" />
               Image
             </Label>
-            <Input
-              id="image"
-              type="file"
-              accept="image/*"
-              className="bg-gray-800 text-gray-100 file:cursor-pointer file:rounded-sm file:bg-white focus:cursor-pointer"
-              {...register("image")}
-            />
+            <div className="mx-auto max-w-[90%] overflow-hidden">
+              <ImageUploadBtn setImageUrl={setImageUrl} />
+              {imageUrl ? (
+                <Link
+                  className="block w-full text-center text-white hover:cursor-pointer"
+                  href={imageUrl}
+                >
+                  {"Link to image"}
+                </Link>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="space-y-2">
             <Label

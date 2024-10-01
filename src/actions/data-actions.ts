@@ -52,3 +52,13 @@ export const AddProduct = async (
     },
   });
 };
+
+export const getAllProducts = async (category?: string, brand?: string) => {
+  const products = prisma.product.findMany({
+    where: {
+      ...(category && { categorySlug: category }),
+      ...(brand && { brandSlug: brand }),
+    },
+  });
+  return products;
+};

@@ -1,7 +1,9 @@
-const ProductResults = () => {
-  return (
-    <div>ProductResults</div>
-  )
-}
+import { getAllProducts } from "@/actions/data-actions";
 
-export default ProductResults
+const ProductResults = async () => {
+  const products = await getAllProducts();
+  console.log(products);
+  return <div></div>;
+};
+
+export default ProductResults;

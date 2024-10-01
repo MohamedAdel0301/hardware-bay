@@ -9,6 +9,14 @@ const nextConfig = {
     },
   },
 
+  images:{
+    remotePatterns:[
+      {
+        hostname:'utfs.io'
+      }
+    ]
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
