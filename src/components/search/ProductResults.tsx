@@ -6,7 +6,7 @@ const ProductResults = async () => {
   console.log(products);
   return (
     <main className="flex-1">
-      <section className="grid grid-cols-2">
+      <section className="grid grid-cols-2 grid-rows-4 gap-8">
         {products.map((product) => (
           <ProductSlice key={product.id} product={product} />
         ))}
