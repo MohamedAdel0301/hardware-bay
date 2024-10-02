@@ -1,4 +1,4 @@
-import { getAllProducts } from "@/actions/data-actions";
+import { getProducts } from "@/actions/data-actions";
 import ProductSlice from "./ProductSlice";
 import { checkAll, cn } from "@/lib/utils";
 import { TSearchPageParams } from "@/app/search/page";
@@ -13,10 +13,16 @@ const ProductResults = async ({ searchParams, className }: TProductResults) => {
     cat: categoryParam,
     brand: brandParam,
     price: priceParam,
+    query: queryParam,
   } = searchParams;
-  const [cat, brand, price] = checkAll(categoryParam, brandParam, priceParam);
+  const [cat, brand, price, query] = checkAll(
+    categoryParam,
+    brandParam,
+    priceParam,
+    queryParam,
+  );
 
-  const products = await getAllProducts({ category: cat, brand, price });
+  const products = await getProducts({ category: cat, brand, price, query });
   return (
     <main className={cn("", className)}>
       <h1 className="mb-4 text-3xl">

@@ -6,6 +6,7 @@ export type TSearchPageParams = {
   cat?: string;
   brand?: string;
   price?: string;
+  query?: string;
 };
 
 const SearchPage = ({ searchParams }: { searchParams: TSearchPageParams }) => {

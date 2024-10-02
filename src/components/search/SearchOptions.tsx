@@ -29,7 +29,7 @@ const SearchOptions = ({
 }: TSearchOptions) => {
   const router = useRouter();
 
-  const [priceRange, setPriceRange] = useState([0, 45000]);
+  const [priceRange, setPriceRange] = useState([1000, 45000]);
   const searchParams = useSearchParams();
   const [category, setCategory] = useState<string | undefined>(
     searchParams.get("cat") ?? undefined,
@@ -40,9 +40,9 @@ const SearchOptions = ({
 
   const onChangeParameters = () => {
     const params = new URLSearchParams();
-    const query = searchParams.get("q");
+    const query = searchParams.get("query");
     if (query) {
-      params.set("q", query);
+      params.set("query", query);
     }
     if (category) {
       params.set("cat", category);
@@ -87,7 +87,7 @@ const SearchOptions = ({
             <Slider
               min={0}
               max={45000}
-              step={100}
+              step={50}
               value={priceRange}
               onValueChange={setPriceRange}
               className="w-full"

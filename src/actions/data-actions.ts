@@ -53,14 +53,16 @@ export const postProduct = async (
   });
 };
 
-export const getAllProducts = async ({
+export const getProducts = async ({
   category,
   brand,
   price,
+  query,
 }: {
   category?: string;
   brand?: string;
   price?: string;
+  query?: string;
 }) => {
   const products = prisma.product.findMany({
     where: {
@@ -68,7 +70,13 @@ export const getAllProducts = async ({
       ...(brand && { brandSlug: brand }),
       ...(price && {
         price: {
-          lte: parseFloat(price), // Fetch products with price <= provided price
+          lte: parseFloat(price),
+        },
+      }),
+      ...(query && {
+        name: {
+          contains: query,
+          mode: "insensitive",
         },
       }),
     },

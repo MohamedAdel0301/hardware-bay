@@ -3,6 +3,7 @@ import Logo from "../misc/Logo";
 import CategoriesBtn from "./CategoriesBtn";
 import Link from "next/link";
 import AuthSection from "./AuthSection";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -18,6 +19,7 @@ const Navbar = () => {
             Contact Us
           </Link>
         </nav>
+        <SearchBar />
       </section>
       <AuthSection />
     </header>
