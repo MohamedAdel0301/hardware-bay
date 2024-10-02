@@ -23,32 +23,35 @@ model User {
 }
 
 model Product {
-  id                   String                 @id @default(cuid())
-  name                 String
-  description          String
-  image                String[]
-  price                Float
-  sold                 Boolean                @default(false)
-  seller               User                   @relation(fields: [sellerId], references: [id])
-  sellerId             String
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  CategoriesOnProducts CategoriesOnProducts[]
+  id           String   @id @default(cuid())
+  name         String
+  description  String
+  image        String
+  price        Float
+  sold         Boolean  @default(false)
+  seller       User     @relation(fields: [sellerId], references: [id])
+  sellerId     String
+  brand        Brand    @relation(fields: [brandSlug], references: [slug])
+  brandSlug    String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  category     Category @relation(fields: [categorySlug], references: [slug])
+  categorySlug String
 }
 
 model Category {
-  id                   String                 @id @default(cuid())
-  name                 String                 @unique
-  slug                 String                 @unique
-  image                String
-  CategoriesOnProducts CategoriesOnProducts[]
+  id      String    @id @default(cuid())
+  name    String    @unique
+  slug    String    @unique
+  image   String
+  Product Product[]
 }
 
-model CategoriesOnProducts {
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  String
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String
-
-  @@id([productId, categoryId])
+model Brand {
+  id         String    @id @default(cuid())
+  name       String    @unique
+  slug       String    @unique
+  logoUrl    String?
+  websiteUrl String?
+  Product    Product[]
 }

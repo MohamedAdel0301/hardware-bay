@@ -16,8 +16,6 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
           return null;
         }
         const { email, password } = validation.data;
-        console.log(validation.data);
-
         const user = await prisma.user.findUnique({
           where: {
             email,
@@ -45,10 +43,7 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
     maxAge: 7 * 24 * 60 * 60,
   },
   callbacks: {
-    //determine if user is authorized on a given request
-    //use auth to check on the session
     authorized: ({ auth, request }) => {
-      //return false on disallowed requests
       return true;
     },
     redirect: async ({ url, baseUrl }) => {
@@ -61,6 +56,12 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
         token.email = user.email;
       }
       return token;
+    },
+    async session({ token, session }) {
+      if (token) {
+        session.user.id = token.id as string;
+      }
+      return session;
     },
   },
 } satisfies NextAuthConfig);

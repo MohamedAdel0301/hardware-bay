@@ -17,7 +17,7 @@ const FormRegister = () => {
     resolver: zodResolver(ZodRegisterSchema),
   });
 
-  const subtmitForm = async (data: TRegisterSchema) => {
+  const submitForm = async (data: TRegisterSchema) => {
     const result = await signUp(data);
     if (result.success) {
       toast.success("Registered successfully");
@@ -31,7 +31,7 @@ const FormRegister = () => {
   return (
     <form
       className="mb-8 flex h-full w-full flex-col justify-center space-y-2"
-      onSubmit={handleSubmit((data) => subtmitForm(data))}
+      onSubmit={handleSubmit((data) => submitForm(data))}
     >
       <div className="flex flex-col space-y-1">
         <label htmlFor="username" className="font-semibold">

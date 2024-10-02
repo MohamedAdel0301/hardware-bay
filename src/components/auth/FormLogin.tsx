@@ -18,7 +18,7 @@ const FormLogin = () => {
     resolver: zodResolver(ZodLoginSchema),
   });
 
-  const subtmitForm = async (data: TLoginSchema) => {
+  const submitForm = async (data: TLoginSchema) => {
     try {
       const result = await logIn(data);
       if (result.success) {
@@ -34,7 +34,7 @@ const FormLogin = () => {
   return (
     <form
       className="mb-8 flex h-full w-full flex-col justify-center space-y-2"
-      onSubmit={handleSubmit((data) => subtmitForm(data))}
+      onSubmit={handleSubmit((data) => submitForm(data))}
     >
       <div className="flex flex-col space-y-1">
         <label htmlFor="email" className="font-semibold">

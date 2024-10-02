@@ -1,7 +1,7 @@
 import React from "react";
 import AuthBtn from "./AuthBtn";
-import SignoutBtn from "./SignoutBtn";
 import { auth } from "@/auth";
+import AccountBtn from "./AccountBtn";
 
 const AuthSection = async () => {
   const session = await auth();
@@ -23,7 +23,7 @@ const AuthSection = async () => {
           </AuthBtn>
         </section>
       )}
-      {session?.user && <SignoutBtn />}
+      {session?.user && <AccountBtn />}
     </div>
   );
 };

@@ -1,4 +1,7 @@
-import { Category as prismaCategory } from "@prisma/client";
+import {
+  Category as prismaCategory,
+  Brand as prismaBrand,
+} from "@prisma/client";
 
 export type Category = Omit<prismaCategory, "id">;
 
@@ -122,5 +125,32 @@ export const categories: Category[] = [
     name: "Printer",
     slug: "printer",
     image: "/catalogues/printer.png",
-  }
+  },
+];
+
+export type Brand = Omit<prismaBrand, "id" | "logoUrl" | "websiteUrl">;
+
+export const brands: Brand[] = [
+  { name: "ASUS", slug: "asus" },
+  { name: "MSI", slug: "msi" },
+  { name: "Gigabyte", slug: "gigabyte" },
+  { name: "EVGA", slug: "evga" },
+  { name: "Corsair", slug: "corsair" },
+  { name: "NZXT", slug: "nzxt" },
+  { name: "Cooler Master", slug: "cooler-master" },
+  { name: "Noctua", slug: "noctua" },
+  { name: "Thermaltake", slug: "thermaltake" },
+  { name: "Intel", slug: "intel" },
+  { name: "AMD", slug: "amd" },
+  { name: "NVIDIA", slug: "nvidia" },
+  { name: "Zotac", slug: "zotac" },
+  { name: "ASRock", slug: "asrock" },
+  { name: "Be Quiet!", slug: "be-quiet" },
+  { name: "G.Skill", slug: "gskill" },
+  { name: "Patriot", slug: "patriot" },
+  { name: "Crucial", slug: "crucial" },
+  { name: "Seagate", slug: "seagate" },
+  { name: "Western Digital", slug: "western-digital" },
+  { name: "Kingston", slug: "kingston" },
+  { name: "SilverStone", slug: "silverstone" },
 ];
