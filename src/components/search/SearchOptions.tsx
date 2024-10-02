@@ -50,6 +50,9 @@ const SearchOptions = ({
     if (brand) {
       params.set("brand", brand);
     }
+    if (priceRange) {
+      params.set("price", String(priceRange[0]));
+    }
     router.push(`?${params.toString()}`);
   };
 

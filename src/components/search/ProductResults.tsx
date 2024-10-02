@@ -1,15 +1,24 @@
 import { getAllProducts } from "@/actions/data-actions";
 import ProductSlice from "./ProductSlice";
+import { checkAll, cn } from "@/lib/utils";
+import { TSearchPageParams } from "@/app/search/page";
 
 type TProductResults = {
-  searchParams: { cat: string; brand: string };
+  searchParams: TSearchPageParams;
+  className: string;
 };
 
-const ProductResults = async ({ searchParams }: TProductResults) => {
-  const { cat, brand } = searchParams;
-  const products = await getAllProducts(cat, brand);
+const ProductResults = async ({ searchParams, className }: TProductResults) => {
+  let {
+    cat: categoryParam,
+    brand: brandParam,
+    price: priceParam,
+  } = searchParams;
+  const [cat, brand, price] = checkAll(categoryParam, brandParam, priceParam);
+
+  const products = await getAllProducts({ category: cat, brand, price });
   return (
-    <main className="flex-1">
+    <main className={cn("", className)}>
       <h1 className="mb-4 text-3xl">
         Found <strong className="font-extrabold">{products.length}</strong>{" "}
         results
