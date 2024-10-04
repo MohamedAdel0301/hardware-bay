@@ -3,11 +3,10 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { ZodLoginSchema } from "./types/auth-types";
 import prisma from "../prisma/client";
+import { nextAuthEdgeConfig } from "./auth-edge";
 
 export const { handlers, signIn, auth, signOut } = NextAuth({
-  pages: {
-    signIn: "/auth/signin",
-  },
+  ...nextAuthEdgeConfig,
   providers: [
     Credentials({
       async authorize(credentials: Record<string, unknown>) {
@@ -35,33 +34,5 @@ export const { handlers, signIn, auth, signOut } = NextAuth({
       },
     }),
   ],
-
   secret: process.env.SECRET,
-
-  session: {
-    strategy: "jwt",
-    maxAge: 7 * 24 * 60 * 60,
-  },
-  callbacks: {
-    authorized: ({ auth, request }) => {
-      return true;
-    },
-    redirect: async ({ url, baseUrl }) => {
-      return baseUrl;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.name = user.name;
-        token.email = user.email;
-      }
-      return token;
-    },
-    async session({ token, session }) {
-      if (token) {
-        session.user.id = token.id as string;
-      }
-      return session;
-    },
-  },
 } satisfies NextAuthConfig);

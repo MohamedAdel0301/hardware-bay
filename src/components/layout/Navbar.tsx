@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Logo from "../misc/Logo";
 import CategoriesBtn from "./CategoriesBtn";
 import Link from "next/link";
@@ -19,7 +19,9 @@ const Navbar = () => {
             Contact Us
           </Link>
         </nav>
-        <SearchBar />
+        <Suspense fallback={<div>...Loading</div>}>
+          <SearchBar />
+        </Suspense>
       </section>
       <AuthSection />
     </header>

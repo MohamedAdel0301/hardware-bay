@@ -1,6 +1,6 @@
 import React from "react";
 import AuthBtn from "./AuthBtn";
-import { auth } from "@/auth";
+import { auth } from "@/auth-no-edge";
 import AccountBtn from "./AccountBtn";
 
 const AuthSection = async () => {

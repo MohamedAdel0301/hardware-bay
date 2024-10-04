@@ -1,14 +1,7 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/types"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -28,12 +21,10 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
+      "@/*": ["./src/*"],
       "@auth/core/*": [
         "./node_modules/.pnpm/@auth+core@0.18.1/node_modules/@auth/core/*"
-      ],
+      ]
     }
   },
   "include": [
@@ -41,9 +32,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
+    ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

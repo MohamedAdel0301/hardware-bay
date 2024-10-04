@@ -6,7 +6,10 @@ const CategoriesMenu = () => {
   return (
     <div className="grid grid-cols-4 grid-rows-6 gap-1">
       {categories.map((category) => (
-        <Link href={`/search?cat=${category.slug}`}>
+        <Link
+          href={`/search?cat=${category.slug}`}
+          key={`cat-${category.slug}`}
+        >
           <div
             key={category.slug}
             className="flex min-w-full justify-center rounded-sm p-1 text-white transition-all hover:bg-stone-700"

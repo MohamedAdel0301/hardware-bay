@@ -13,13 +13,16 @@ import { useSession } from "next-auth/react";
 import defaultProfile from "./../../../public/default-profile.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function AccountBtn() {
   const { data } = useSession();
-
+  const [email, _] = useState<string | null | undefined>(() =>
+    data ? data.user?.email : "Loading...",
+  );
   return (
     <div className="flex justify-center gap-4">
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
           <div className="h-12 w-12 rounded-full">
             <Image src={defaultProfile} alt="fallback image" />
@@ -27,7 +30,7 @@ export default function AccountBtn() {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="min-w-52 border-none bg-stone-950 shadow-sm shadow-white">
           <DropdownMenuLabel className="text-center text-lg text-white">
-            {data ? data.user?.email : "Loading..."}
+            {email}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel className="text-center text-lg text-white">

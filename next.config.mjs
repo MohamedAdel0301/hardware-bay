@@ -9,12 +9,12 @@ const nextConfig = {
     },
   },
 
-  images:{
-    remotePatterns:[
+  images: {
+    remotePatterns: [
       {
-        hostname:'utfs.io'
-      }
-    ]
+        hostname: "utfs.io",
+      },
+    ],
   },
 
   webpack(config) {

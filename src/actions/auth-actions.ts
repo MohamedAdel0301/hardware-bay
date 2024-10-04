@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn, signOut } from "@/auth";
+import { signIn, signOut } from "@/auth-no-edge";
 import { result, ZodRegisterSchema } from "@/types/auth-types";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";

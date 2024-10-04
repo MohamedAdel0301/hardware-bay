@@ -17,7 +17,7 @@ import {
   Grid,
   Folder,
   FileText,
-  Image,
+  Image as ImageIcon,
 } from "lucide-react";
 import { Brand, Category } from "@/data";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -151,7 +151,7 @@ const AddProductForm = ({ categories, brands }: TAddProductForm) => {
           </div>
           <div className="space-y-2">
             <Label className="flex items-center text-gray-300">
-              <Image className="mr-2 h-4 w-4 text-purple-400" />
+              <ImageIcon className="mr-2 h-4 w-4 text-purple-400" />
               Image
             </Label>
             <div className="mx-auto max-w-[90%] overflow-hidden">
