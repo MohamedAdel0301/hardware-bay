@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "./client";
 import { brands, Brand, categories, Category } from "./../src/data";
-
-const prisma = new PrismaClient();
 
 async function addCategories(category: Category, index: number) {
   await prisma.category.create({
