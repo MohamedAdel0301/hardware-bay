@@ -22,15 +22,27 @@ async function addBrands(brand: Brand, index: number) {
 
 async function main() {
   for (const [index, category] of categories.entries()) {
-    await addCategories(category, index);
+    try {
+      await addCategories(category, index);
+    } catch (e) {
+      console.log(e);
+      console.log(`failed to add category ${index}`);
+    }
   }
   for (const [index, brand] of brands.entries()) {
-    await addBrands(brand, index);
+    try {
+      await addBrands(brand, index);
+    } catch (e) {
+      console.log(e);
+      console.log(`failed to add brand ${index}`);
+    }
   }
 }
 
 main()
   .catch((e) => {
+    console.log(e);
+    console.log("couldn't connect to database");
     process.exit(1);
   })
   .finally(async () => {
