@@ -1,14 +1,15 @@
+"use client";
 import React from "react";
 import AuthBtn from "./AuthBtn";
-import { auth } from "@/auth-no-edge";
 import AccountBtn from "./AccountBtn";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 
-const AuthSection = async ({ className }: { className?: string }) => {
-  const session = await auth();
+const AuthSection = ({ className }: { className?: string }) => {
+  const { status } = useSession();
   return (
     <div className={cn("", className)}>
-      {!session?.user && (
+      {status == "unauthenticated" && (
         <section className="flex w-52 gap-4 text-2xl">
           <AuthBtn
             href={"/auth/signin"}
@@ -24,7 +25,7 @@ const AuthSection = async ({ className }: { className?: string }) => {
           </AuthBtn>
         </section>
       )}
-      {session?.user && <AccountBtn />}
+      {status == "authenticated" && <AccountBtn />}
     </div>
   );
 };

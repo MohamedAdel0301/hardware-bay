@@ -10,10 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/actions/auth-actions";
 import { useSession } from "next-auth/react";
-import defaultProfile from "./../../../public/default-profile.png";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ProfileBtn from "./ProfileBtn";
 
 export default function AccountBtn() {
   const { data, status } = useSession();
@@ -32,9 +31,7 @@ export default function AccountBtn() {
     <div className="flex justify-center gap-4">
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
-          <div className="h-12 w-12 rounded-full">
-            <Image src={defaultProfile} alt="fallback image" />
-          </div>
+          <ProfileBtn/>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="min-w-52 border-none bg-stone-950 shadow-sm shadow-white">
           <DropdownMenuLabel className="text-center text-lg text-white">

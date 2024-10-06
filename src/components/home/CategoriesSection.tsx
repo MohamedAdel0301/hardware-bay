@@ -6,7 +6,7 @@ const CategoriesSection = async () => {
   return (
     <section className="my-12 flex w-full flex-col gap-8">
       <h2 className="w-full text-center text-4xl">Categories</h2>
-      <section className="grid grid-cols-2 gap-y-4 md:grid-cols-4">
+      <section className="grid grid-cols-2 gap-y-4 sm:grid-cols-3 md:grid-cols-4">
         {categories.map((category, key) => (
           <CategoryItem category={category} key={category.name + key} />
         ))}

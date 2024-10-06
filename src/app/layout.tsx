@@ -46,7 +46,7 @@ export default async function RootLayout({
       className="scrollbar-thin scrollbar-track-black scrollbar-thumb-gray-600"
     >
       <body
-        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative bg-black bg-gradient-to-r font-sans text-white antialiased`}
+        className={`${roboto.variable} ${playfair.variable} ${workSans.variable} relative overflow-x-clip bg-black bg-gradient-to-r font-sans text-white antialiased`}
       >
         <HomeGradients />
         <SessionProvider>
