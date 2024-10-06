@@ -3,7 +3,7 @@ import FormLogin from "@/components/auth/FormLogin";
 
 const LoginPage = () => {
   return (
-    <main className="mt-24 flex min-h-[100%] justify-center">
+    <main className="mt-12 flex min-h-[100%] justify-center">
       <AuthTemplate type="login">
         <FormLogin />
       </AuthTemplate>

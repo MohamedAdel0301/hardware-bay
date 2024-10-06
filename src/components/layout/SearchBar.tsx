@@ -3,8 +3,9 @@
 import { useState, useRef } from "react";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-const SearchBar = () => {
+const SearchBar = ({ className }: { className?: string }) => {
   const router = useRouter();
   const params = useSearchParams();
   const query = params.get("query");
@@ -31,7 +32,12 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-transparent">
+    <div
+      className={cn(
+        "flex items-center justify-center bg-transparent",
+        className,
+      )}
+    >
       <form onSubmit={handleSubmit} className="relative">
         <div
           className={`flex cursor-pointer items-center rounded-full bg-gray-900 transition-all duration-300 ease-in-out ${isExpanded ? "w-64" : "w-12"} h-12`}

@@ -7,12 +7,15 @@ import {
 import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 import CategoriesMenu from "./CategoriesMenu";
+import { cn } from "@/lib/utils";
 
-const CategoriesBtn = () => {
+const CategoriesBtn = ({ className }: { className?: string }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={true}>
-      <DropdownMenuTrigger className="border-none outline-none">
+      <DropdownMenuTrigger
+        className={cn("border-none outline-none", className)}
+      >
         <div className="flex">
           Categories
           {isOpen ? (

@@ -13,13 +13,21 @@ import { useSession } from "next-auth/react";
 import defaultProfile from "./../../../public/default-profile.png";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AccountBtn() {
-  const { data } = useSession();
-  const [email, _] = useState<string | null | undefined>(() =>
+  const { data, status } = useSession();
+  const [email, setEmail] = useState<string | null | undefined>(() =>
     data ? data.user?.email : "Loading...",
   );
+
+  //when status changes to authenticated, change the placeholder email
+  useEffect(() => {
+    if (status === "authenticated") {
+      setEmail(data?.user?.email);
+    }
+  }, [status, data]);
+
   return (
     <div className="flex justify-center gap-4">
       <DropdownMenu modal={false}>

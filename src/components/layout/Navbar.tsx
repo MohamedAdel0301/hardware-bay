@@ -11,19 +11,21 @@ const Navbar = () => {
       <section className="flex items-center gap-8">
         <Logo className="max-w-44" />
         <nav className="flex gap-8 text-2xl">
-          <CategoriesBtn />
-          <Link href={"/"} className="link-underline">
-            About
-          </Link>
-          <Link href={"/"} className="link-underline">
-            Contact Us
-          </Link>
+          <CategoriesBtn className="hidden md:flex" />
+          <div className="hidden gap-8 lg:flex">
+            <Link href={"/"} className="link-underline">
+              About
+            </Link>
+            <Link href={"/"} className="link-underline">
+              Contact Us
+            </Link>
+          </div>
         </nav>
         <Suspense fallback={<div>...Loading</div>}>
-          <SearchBar />
+          <SearchBar className="hidden md:flex" />
         </Suspense>
       </section>
-      <AuthSection />
+      <AuthSection className="hidden sm:block" />
     </header>
   );
 };

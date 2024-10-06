@@ -2,11 +2,12 @@ import React from "react";
 import AuthBtn from "./AuthBtn";
 import { auth } from "@/auth-no-edge";
 import AccountBtn from "./AccountBtn";
+import { cn } from "@/lib/utils";
 
-const AuthSection = async () => {
+const AuthSection = async ({ className }: { className?: string }) => {
   const session = await auth();
   return (
-    <div>
+    <div className={cn("", className)}>
       {!session?.user && (
         <section className="flex w-52 gap-4 text-2xl">
           <AuthBtn

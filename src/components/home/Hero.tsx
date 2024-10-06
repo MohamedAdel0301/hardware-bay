@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { heroText, heroSubtext } from "../layout";
+import { heroText, heroSubtext } from "../layout/data";
 import HeroImage from "../misc/HeroImage";
 
 const Hero = () => {
@@ -10,12 +10,12 @@ const Hero = () => {
         <p className="text-2xl">{heroSubtext}</p>
         <Link
           href="/auth/signup"
-          className="self-start rounded-md bg-btnGradient px-4 py-2 text-xl font-semibold text-black"
+          className="self-center rounded-md bg-btnGradient px-4 py-2 text-xl font-semibold text-black transition-all hover:scale-105 active:scale-95 sm:self-start"
         >
           Get Started
         </Link>
       </section>
-      <HeroImage />
+      <HeroImage className="hidden sm:block" />
     </section>
   );
 };

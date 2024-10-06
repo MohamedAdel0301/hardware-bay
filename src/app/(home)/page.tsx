@@ -3,7 +3,7 @@ import Hero from "@/components/home/Hero";
 
 export default function Home() {
   return (
-    <main className="mt-24">
+    <main className="mt-12">
       <Hero />
       <CategoriesSection />
     </main>
