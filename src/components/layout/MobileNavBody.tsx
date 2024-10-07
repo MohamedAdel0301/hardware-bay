@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Button } from "../ui/button";
-import ProfileBtn from "./ProfileBtn";
+import MobileNavAuth from "./MobileNavAuth";
 
 const MobileNavBody = () => {
   const { categories } = useGlobalData();
@@ -12,13 +12,7 @@ const MobileNavBody = () => {
   return (
     <nav className="flex w-full min-w-full gap-8 px-2 text-2xl">
       <div className="mt-12 flex w-full flex-col items-center gap-4">
-        <ProfileBtn />
-        <Link href="/" className="link-underline">
-          Account
-        </Link>
-        <Link href="/product/new" className="link-underline">
-          Add product
-        </Link>
+        <MobileNavAuth />
         <Link href={"/"} className="link-underline">
           About
         </Link>
@@ -29,7 +23,7 @@ const MobileNavBody = () => {
           Search
         </Link>
         <ScrollArea
-          className={`transition-all duration-300 ease-in-out ${isExpanded ? "h-72" : "h-12"} ${isExpanded ? "overflow-y-scroll" : "overflow-y-hidden"} scrollbar-thumb-rounded-full scrollbar-gray-800 w-40 space-y-2 overflow-hidden rounded-md border scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-white`}
+          className={`transition-all duration-300 ease-in-out ${isExpanded ? "h-72" : "h-12"} ${isExpanded ? "overflow-y-scroll" : "overflow-y-hidden"} scrollbar-gray-800 w-40 space-y-2 overflow-hidden rounded-md border scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-white scrollbar-thumb-rounded-full`}
           onBlur={() => setIsExpanded(false)}
         >
           <Button
