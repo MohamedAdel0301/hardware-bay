@@ -53,6 +53,25 @@ export const postProduct = async (
   });
 };
 
+export const getOneProduct = async (id: string) => {
+  const product = await prisma.product.findUnique({ where: { id } });
+  if (!product) return null;
+  const seller = await prisma.user.findUnique({
+    where: { id: product.sellerId },
+    select: { username: true },
+  });
+  const category = await prisma.category.findUnique({
+    where: { slug: product.categorySlug },
+    select: { name: true },
+  });
+  const brand = await prisma.brand.findUnique({
+    where: { slug: product.brandSlug },
+    select: { name: true },
+  });
+  const productMetadata = { ...product, seller, category, brand };
+  return productMetadata;
+};
+
 export const getProducts = async ({
   category,
   brand,
@@ -64,7 +83,7 @@ export const getProducts = async ({
   price?: string;
   query?: string;
 }) => {
-  const products = prisma.product.findMany({
+  const products = await prisma.product.findMany({
     where: {
       ...(category && { categorySlug: category }),
       ...(brand && { brandSlug: brand }),
