@@ -13,14 +13,14 @@ const ProductSlice = async ({ product }: TProductSlice) => {
   return (
     <Card className="relative overflow-hidden rounded-lg border-none bg-transparent p-1 hover:cursor-pointer">
       <CardContent className="p-0">
-        <div className="flex flex-col overflow-hidden sm:flex-row">
-          <section className="relative w-full overflow-hidden rounded-lg sm:w-3/5">
+        <div className="flex flex-col overflow-hidden">
+          <section className="relative w-full min-w-full overflow-hidden rounded-lg">
             <Image
               src={product.image}
               alt={product.name}
               width={800}
               height={600}
-              className="scale-150 object-cover"
+              className="min-h-48 scale-110 object-cover"
             />
           </section>
           <section className="flex w-full flex-col justify-between p-4 sm:w-1/3">

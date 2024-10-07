@@ -25,11 +25,11 @@ const ProductResults = async ({ searchParams, className }: TProductResults) => {
   const products = await getProducts({ category: cat, brand, price, query });
   return (
     <main className={cn("", className)}>
-      <h1 className="mb-4 text-3xl">
+      <h1 className="mb-4 text-xl sm:text-3xl">
         Found <strong className="font-extrabold">{products.length}</strong>{" "}
         results
       </h1>
-      <section className="grid grid-cols-2 grid-rows-4 gap-8">
+      <section className="grid grid-cols-1 grid-rows-8 gap-8 md:grid-cols-2 md:grid-rows-4">
         {products.map((product) => (
           <ProductSlice key={product.id} product={product} />
         ))}

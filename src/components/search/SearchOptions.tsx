@@ -57,14 +57,14 @@ const SearchOptions = ({
   };
 
   return (
-    <div className={cn("w-full max-w-xs flex-1", className)}>
+    <div className={cn("w-full max-w-xs flex-1 max-sm:min-w-full", className)}>
       <Card className="w-full border-gray-800 bg-gray-900">
-        <CardHeader className="border-b border-gray-800">
-          <CardTitle className="text-center text-2xl font-bold text-gray-100">
+        <CardHeader className="border-b border-gray-800 max-sm:p-3">
+          <CardTitle className="text-center text-xl font-bold text-gray-100 sm:text-2xl">
             Search Options
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6 pt-6">
+        <CardContent className="space-y-1 pt-6 md:block md:space-y-6">
           <div className="space-y-2">
             <SearchOptionsSelect
               label="Category"
