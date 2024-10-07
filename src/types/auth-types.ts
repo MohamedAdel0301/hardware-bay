@@ -6,7 +6,11 @@ export const ZodRegisterSchema = z
     username: z
       .string()
       .min(3, { message: "Username must contain at least 3 Character(s)" }),
-    email: z.string().email().min(5),
+    email: z
+      .string()
+      .email()
+      .min(5)
+      .transform((val) => val.toLowerCase()),
     password: z
       .string()
       .min(8, { message: "Password must contain at least 8 Character(s)" })
@@ -27,7 +31,11 @@ export const ZodRegisterSchema = z
 export type TRegisterSchema = z.infer<typeof ZodRegisterSchema>;
 
 export const ZodLoginSchema = z.object({
-  email: z.string().email().min(5),
+  email: z
+    .string()
+    .email()
+    .min(5)
+    .transform((val) => val.toLowerCase()),
   password: z
     .string()
     .min(8, { message: "Password must contain at least 8 Character(s)" })

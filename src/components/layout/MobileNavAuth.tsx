@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 const MobileNavAuth = () => {
-  const { data, status } = useSession();
+  const { status } = useSession();
   const [isLoggedin, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {

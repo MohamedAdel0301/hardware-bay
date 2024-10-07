@@ -52,7 +52,7 @@ export async function signUp(data: unknown): Promise<result> {
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
       if (err.code === "P2002") {
-        return { success: false, error: "Credentials already exist" };
+        return { success: false, error: "User already exist" };
       }
     }
     return { success: false, error: "Unknown server error" };
