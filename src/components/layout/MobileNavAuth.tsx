@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProfileBtn from "./ProfileBtn";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 const MobileNavAuth = () => {
   const { data, status } = useSession();
+  const [isLoggedin, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setIsLoggedIn(() => true);
+    }
+    if (status === "unauthenticated") {
+      setIsLoggedIn(() => false);
+    }
+  }, [status]);
   return (
     <>
-      {status === "authenticated" && data?.user ? (
+      {isLoggedin ? (
         <>
           <ProfileBtn />
           <Link href="/" className="link-underline">
