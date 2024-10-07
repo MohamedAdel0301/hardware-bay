@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 import SearchBarFallback from "./SearchBarFallback";
 import MobileNav from "./MobileNav";
 import { useMediaQuery } from "usehooks-ts";
+import MobileNavProvider from "@/contexts/MobileNavProvider";
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -51,7 +52,11 @@ const Navbar = () => {
       </header>
     );
   }
-  return <MobileNav />;
+  return (
+    <MobileNavProvider>
+      <MobileNav />
+    </MobileNavProvider>
+  );
 };
 
 export default Navbar;

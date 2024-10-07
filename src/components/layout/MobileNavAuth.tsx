@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProfileBtn from "./ProfileBtn";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
+import MobileNavBtn from "./MobileNavBtn";
 
 const MobileNavAuth = () => {
   const { status } = useSession();
@@ -20,21 +20,13 @@ const MobileNavAuth = () => {
       {isLoggedin ? (
         <>
           <ProfileBtn />
-          <Link href="/" className="link-underline">
-            Account
-          </Link>
-          <Link href="/product/new" className="link-underline">
-            Add product
-          </Link>
+          <MobileNavBtn href="/">Account</MobileNavBtn>
+          <MobileNavBtn href="/product/new">Add product</MobileNavBtn>
         </>
       ) : (
         <>
-          <Link href={"/auth/signup"} className="link-underline">
-            Sign up
-          </Link>
-          <Link href={"/auth/signin"} className="link-underline">
-            Login
-          </Link>
+          <MobileNavBtn href={"/auth/signup"}>Sign up</MobileNavBtn>
+          <MobileNavBtn href={"/auth/signin"}>Login</MobileNavBtn>
         </>
       )}
     </>

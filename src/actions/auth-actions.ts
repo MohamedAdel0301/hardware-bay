@@ -61,7 +61,7 @@ export async function signUp(data: unknown): Promise<result> {
 }
 
 export async function logout() {
-  await signOut({ redirectTo: "/auth/signin" });
+  await signOut({ redirectTo: "/" });
 }
 
 export async function getOneUser({

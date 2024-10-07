@@ -31,7 +31,7 @@ const FormRegister = () => {
   return (
     <form
       className="mb-8 flex h-full w-full flex-col justify-center space-y-2"
-      onSubmit={handleSubmit((data) => submitForm(data))}
+      onSubmit={handleSubmit(submitForm)}
     >
       <div className="flex flex-col space-y-1">
         <label htmlFor="username" className="font-semibold">
@@ -40,7 +40,7 @@ const FormRegister = () => {
         <input
           id="username"
           placeholder="Enter your username"
-          className="input-element max-w-[90%]"
+          className="input-element md:max-w-[90%]"
           required
           {...register("username")}
         />
@@ -57,7 +57,7 @@ const FormRegister = () => {
         <input
           id="email"
           placeholder="Enter your email"
-          className="input-element max-w-[90%]"
+          className="input-element md:max-w-[90%]"
           required
           type="email"
           {...register("email")}
@@ -75,7 +75,7 @@ const FormRegister = () => {
         <input
           id="password"
           placeholder="Enter your password"
-          className="input-element max-w-[90%]"
+          className="input-element md:max-w-[90%]"
           required
           type="password"
           {...register("password")}
@@ -92,7 +92,7 @@ const FormRegister = () => {
         </label>
         <input
           id="confirm"
-          className="input-element max-w-[90%]"
+          className="input-element md:max-w-[90%]"
           required
           placeholder="Confirm password"
           type="password"

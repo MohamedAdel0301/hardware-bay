@@ -33,8 +33,8 @@ const FormLogin = () => {
 
   return (
     <form
-      className="mb-8 flex h-full w-full flex-col justify-center space-y-2"
-      onSubmit={handleSubmit((data) => submitForm(data))}
+      className="mb-8 flex h-full w-full flex-col justify-center gap-4 md:gap-2"
+      onSubmit={handleSubmit(submitForm)}
     >
       <div className="flex flex-col space-y-1">
         <label htmlFor="email" className="font-semibold">
@@ -43,7 +43,7 @@ const FormLogin = () => {
         <input
           id="email"
           placeholder="Enter your email"
-          className="input-element max-w-[90%]"
+          className="input-element md:max-w-[90%]"
           type="email"
           required
           {...register("email")}
@@ -61,7 +61,7 @@ const FormLogin = () => {
         <input
           id="password"
           placeholder="Enter your password"
-          className="input-element max-w-[90%]"
+          className="input-element md:max-w-[90%]"
           type="password"
           required
           {...register("password")}

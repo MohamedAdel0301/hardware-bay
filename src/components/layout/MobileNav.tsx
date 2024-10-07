@@ -14,11 +14,13 @@ import MobileNavBody from "./MobileNavBody";
 import { Button } from "../ui/button";
 import { logout } from "@/actions/auth-actions";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import useMobileNav from "@/hooks/useMobileNav";
 
 const MobileNav = () => {
+  const router = useRouter();
   const { status } = useSession();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const {isOpen,setIsOpen}= useMobileNav()
   return (
     <header className="mb-8 flex min-w-full items-center justify-between rounded-b-sm border-b-2 border-b-slate-100/10 pb-4 pt-8 font-worksans">
       <Logo className="max-w-44" />
@@ -44,6 +46,7 @@ const MobileNav = () => {
                 onClick={async () => {
                   await logout();
                   setIsOpen(() => false);
+                  router.refresh();
                 }}
                 type="button"
                 className="bg-red-600 focus:bg-red-700 active:bg-red-700"

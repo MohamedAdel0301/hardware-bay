@@ -13,8 +13,10 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ProfileBtn from "./ProfileBtn";
+import { useRouter } from "next/navigation";
 
 export default function AccountBtn() {
+  const router = useRouter();
   const { data, status } = useSession();
   const [email, setEmail] = useState<string | null | undefined>(() =>
     data ? data.user?.email : "Loading...",
@@ -31,7 +33,7 @@ export default function AccountBtn() {
     <div className="flex justify-center gap-4">
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
-          <ProfileBtn/>
+          <ProfileBtn />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="min-w-52 border-none bg-stone-950 shadow-sm shadow-white">
           <DropdownMenuLabel className="text-center text-lg text-white">
@@ -52,7 +54,10 @@ export default function AccountBtn() {
           <DropdownMenuItem className="bg-red-500 transition-all focus:bg-red-600">
             <button
               className="w-full min-w-full text-center text-lg text-white"
-              onClick={async () => await logout()}
+              onClick={async () => {
+                await logout();
+                router.refresh();
+              }}
             >
               Signout
             </button>
