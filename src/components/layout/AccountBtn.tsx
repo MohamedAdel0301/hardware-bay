@@ -1,5 +1,3 @@
-"use client";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,26 +6,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logout } from "@/actions/auth-actions";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import ProfileBtn from "./ProfileBtn";
-import { useRouter } from "next/navigation";
+import { auth } from "@/auth-no-edge";
+import SignoutBtn from "./SignoutBtn";
 
-export default function AccountBtn() {
-  const router = useRouter();
-  const { data, status } = useSession();
-  const [email, setEmail] = useState<string | null | undefined>(() =>
-    data ? data.user?.email : "Loading...",
-  );
-
-  //when status changes to authenticated, change the placeholder email
-  useEffect(() => {
-    if (status === "authenticated") {
-      setEmail(data?.user?.email);
-    }
-  }, [status, data]);
+const AccountBtn = async () => {
+  const session = await auth();
 
   return (
     <div className="flex justify-center gap-4">
@@ -37,7 +22,7 @@ export default function AccountBtn() {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="min-w-52 border-none bg-stone-950 shadow-sm shadow-white">
           <DropdownMenuLabel className="text-center text-lg text-white">
-            {email}
+            {session?.user?.email ?? "Loading..."}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel className="text-center text-lg text-white">
@@ -52,18 +37,13 @@ export default function AccountBtn() {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="bg-red-500 transition-all focus:bg-red-600">
-            <button
-              className="w-full min-w-full text-center text-lg text-white"
-              onClick={async () => {
-                await logout();
-                router.refresh();
-              }}
-            >
+            <SignoutBtn className="w-full min-w-full text-center text-lg text-white">
               Signout
-            </button>
+            </SignoutBtn>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
   );
-}
+};
+export default AccountBtn;

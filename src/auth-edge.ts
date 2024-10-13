@@ -8,6 +8,12 @@ export const nextAuthEdgeConfig = {
     authorized: ({ auth, request }) => {
       return true;
     },
+    async signIn() {
+      return true;
+    },
+    async redirect({ baseUrl }) {
+      return baseUrl;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
