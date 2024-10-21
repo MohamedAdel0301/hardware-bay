@@ -1,7 +1,11 @@
 "use server";
 
 import { signIn, signOut } from "@/auth-no-edge";
-import { result, ZodRegisterSchema } from "@/types/auth-types";
+import {
+  result,
+  ZodRegisterSchema,
+  ZodSettingsSchema,
+} from "@/types/auth-types";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
@@ -82,4 +86,41 @@ export async function getOneUser({
     select: { username: true, email: true, image: true },
   });
   return user as TUserSettings;
+}
+
+export async function updateUser({
+  id,
+  data,
+}: {
+  id: string;
+  data: {
+    email?: string;
+    username?: string;
+    password?: string;
+  };
+}) {
+  const validation = ZodSettingsSchema.safeParse(data);
+  if (!validation.success) {
+    return false;
+  }
+  const { username, email, password } = validation.data;
+  let hashedPassword;
+  if (password) {
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    hashedPassword = await bcrypt.hash(password, salt);
+  }
+
+  try {
+    await prisma.user.update({
+      where: { id },
+      data: {
+        ...(email && { email }),
+        ...(username && { username }),
+        ...(hashedPassword && { password: hashedPassword }),
+      },
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
