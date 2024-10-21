@@ -2,12 +2,8 @@ import { auth } from "@/auth-no-edge";
 import { redirect } from "next/navigation";
 import React from "react";
 
-type TWithAuthProps = {
-  [key: string]: string;
-};
-
 const WithAuth = (Component: React.FC) => {
-  const WrappedComponent = async (props: TWithAuthProps) => {
+  const WrappedComponent = async (props: any) => {
     const session = await auth();
 
     if (!session?.user) {

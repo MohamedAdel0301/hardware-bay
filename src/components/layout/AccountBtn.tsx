@@ -10,6 +10,7 @@ import Link from "next/link";
 import ProfileBtn from "./ProfileBtn";
 import { auth } from "@/auth-no-edge";
 import SignoutBtn from "./SignoutBtn";
+import { PlusCircle, User2 } from "lucide-react";
 
 const AccountBtn = async () => {
   const session = await auth();
@@ -25,14 +26,27 @@ const AccountBtn = async () => {
             {session?.user?.email ?? "Loading..."}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuLabel className="text-center text-lg text-white">
-            My Account
-          </DropdownMenuLabel>
           <DropdownMenuItem
             className="my-2 flex w-full justify-center text-center text-lg text-white focus:cursor-pointer focus:bg-stone-700 focus:text-white"
             asChild
           >
-            <Link href="/product/new" className="w-full">
+            <Link
+              href="/account/settings"
+              className="flex w-full items-center gap-2"
+            >
+              <User2 />
+              My Account
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="my-2 flex w-full justify-center text-center text-lg text-white focus:cursor-pointer focus:bg-stone-700 focus:text-white"
+            asChild
+          >
+            <Link
+              href="/product/new"
+              className="flex w-full items-center gap-2"
+            >
+              <PlusCircle />
               Add Product
             </Link>
           </DropdownMenuItem>

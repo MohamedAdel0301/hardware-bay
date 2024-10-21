@@ -6,7 +6,7 @@ import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import prisma from "../../prisma/client";
 import { Prisma } from "@prisma/client";
-import type { User } from "@prisma/client";
+import { TUserSettings } from "@/types/user-types";
 
 const SALT_ROUNDS = 10;
 
@@ -70,7 +70,7 @@ export async function getOneUser({
 }: {
   email?: string;
   id?: string;
-}): Promise<User | null> {
+}): Promise<TUserSettings | null> {
   if (!email && !id) {
     throw new Error("Either email or id must be provided");
   }
@@ -79,6 +79,7 @@ export async function getOneUser({
   }
   const user = await prisma.user.findUnique({
     where: email ? { email } : { id },
+    select: { username: true, email: true, image: true },
   });
-  return user;
+  return user as TUserSettings;
 }
